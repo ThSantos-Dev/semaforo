@@ -6,21 +6,21 @@ const btnVermelho = document.getElementById('vermelho')
 const btnAmarelo = document.getElementById('amarelo')
 const btnVerde = document.getElementById('verde')
 const btnAutomatico = document.getElementById('automatico')
-let idInterval = null;
-let farol = null
+let idInterval = null
+let farol = 0
+
+// Verificando se a função 'ligarAutomatico' está ativa
+const autoLigado = () => idInterval != null 
+
 
 // Funções para acender farol
 const ligarVermelho = () => semaforo.src = './img/vermelho.png'
 const ligarAmarelo = () => semaforo.src = './img/amarelo.png' 
 const ligarVerde = () => semaforo.src = './img/verde.png' 
 
-const pararSemaforo = () => {
-    clearInterval(idInterval)
-}
 
 // Alternando entre as cores
 const alternarCores = () => {
-    farol = 0
 
     if(farol == 0){
         ligarVermelho()
@@ -43,9 +43,30 @@ const ligarAutomatico = () => {
 }
 
 // Adicionando eventos
-btnVermelho.addEventListener('click', ligarVermelho)
-btnAmarelo.addEventListener('click', ligarAmarelo)
-btnVerde.addEventListener('click', ligarVerde)
+btnVermelho.addEventListener('click', () => {
+    if(autoLigado) {
+        clearInterval(idInterval)
+        idInterval = null;
+    }
+    farol = 0
+    ligarVermelho()
+})
+btnAmarelo.addEventListener('click', () => {
+    if(autoLigado) {
+        clearInterval(idInterval)
+        idInterval = null;
+    }
+    farol = 1
+    ligarAmarelo()
+})
+btnVerde.addEventListener('click', () => {
+    if(autoLigado) {
+        clearInterval(idInterval)
+        idInterval = null;
+    }
+    farol = 2
+    ligarVerde()
+})
 btnAutomatico.addEventListener('click', ligarAutomatico)
 
 
