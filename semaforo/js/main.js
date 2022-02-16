@@ -11,6 +11,12 @@ let farol = 0
 
 // Verificando se a função 'ligarAutomatico' está ativa
 const autoLigado = () => idInterval != null 
+const desligaAuto = () => {
+    if(autoLigado()) {
+        clearInterval(idInterval)
+        idInterval = null
+    }
+}
 
 
 // Funções para acender farol
@@ -30,7 +36,10 @@ const alternarCores = () => {
         farol++
     }else if(farol == 2){
         ligarVerde()
-        farol = 0
+        farol++
+    }else if(farol == 3) {
+        ligarAmarelo()
+        farol = 0;
     }
 
 }
@@ -44,26 +53,17 @@ const ligarAutomatico = () => {
 
 // Adicionando eventos
 btnVermelho.addEventListener('click', () => {
-    if(autoLigado) {
-        clearInterval(idInterval)
-        idInterval = null;
-    }
+    desligaAuto()
     farol = 0
     ligarVermelho()
 })
 btnAmarelo.addEventListener('click', () => {
-    if(autoLigado) {
-        clearInterval(idInterval)
-        idInterval = null;
-    }
+    desligaAuto()
     farol = 1
     ligarAmarelo()
 })
 btnVerde.addEventListener('click', () => {
-    if(autoLigado) {
-        clearInterval(idInterval)
-        idInterval = null;
-    }
+    desligaAuto()
     farol = 2
     ligarVerde()
 })
