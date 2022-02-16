@@ -24,10 +24,26 @@ const ligarVermelho = () => semaforo.src = './img/vermelho.png'
 const ligarAmarelo = () => semaforo.src = './img/amarelo.png' 
 const ligarVerde = () => semaforo.src = './img/verde.png' 
 
+// Funções para addEventListener
+const farolVermelho = () => {
+    desligaAuto()
+    farol = 0
+    ligarVermelho()
+}
+const farolAmarelo = () => {
+    desligaAuto()
+    farol = 1
+    ligarAmarelo()
+}
+const farolVerde = () => {
+    desligaAuto()
+    farol = 2
+    ligarVerde()
+}
+
 
 // Alternando entre as cores
 const alternarCores = () => {
-
     if(farol == 0){
         ligarVermelho()
         farol++
@@ -41,7 +57,6 @@ const alternarCores = () => {
         ligarAmarelo()
         farol = 0;
     }
-
 }
 
 const ligarAutomatico = () => {
@@ -52,21 +67,9 @@ const ligarAutomatico = () => {
 }
 
 // Adicionando eventos
-btnVermelho.addEventListener('click', () => {
-    desligaAuto()
-    farol = 0
-    ligarVermelho()
-})
-btnAmarelo.addEventListener('click', () => {
-    desligaAuto()
-    farol = 1
-    ligarAmarelo()
-})
-btnVerde.addEventListener('click', () => {
-    desligaAuto()
-    farol = 2
-    ligarVerde()
-})
+btnVermelho.addEventListener('click', farolVermelho)
+btnAmarelo.addEventListener('click', farolAmarelo)
+btnVerde.addEventListener('click', farolVerde)
 btnAutomatico.addEventListener('click', ligarAutomatico)
 
 
